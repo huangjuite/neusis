@@ -3,6 +3,7 @@ import cv2
 import pickle 
 import json 
 import math
+import matplotlib.pyplot as plt
 from scipy.io import savemat
 
 def load_data(target):
@@ -42,6 +43,14 @@ def load_data(target):
             images.append(image)
             sensor_poses.append(pose)
 
+            # print(type(image))
+            # print(image.shape)
+            # print(type(pose))
+            # print(pose)
+            # plt.imshow(image)
+            # plt.show()
+
+
     data = {
         "images": images,
         "images_no_noise": [],
@@ -51,6 +60,12 @@ def load_data(target):
         "hfov": hfov,
         "vfov": vfov
     }
+
+    print(data['min_range'],data['max_range'],data["hfov"],data["vfov"])
     
     savemat('{}/{}.mat'.format(dirpath,target), data, oned_as='row')
     return data
+
+
+if __name__=="__main__":
+    load_data('14deg_submarine')
